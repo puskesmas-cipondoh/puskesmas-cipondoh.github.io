@@ -1,3 +1,44 @@
+let btnAdd = document.getElementById("btnTambah");
+let btnUpdate = document.getElementById("btnUpdate");
+btnAdd.addEventListener("click", () => { addKaryawan() });
+btnUpdate.addEventListener("click", () => { updateKaryawan() });
+
+let addKaryawan = () => {
+    let karyawan = {
+        "name" : document.getElementById("orangeForm-name").value,
+        "position" : document.getElementById("orangeForm-position").value
+    } 
+    console.log(JSON.stringify(karyawan));
+
+    fetch('http://localhost:8000/api/v1/puskesmas/employe', {
+        headers : {
+            "content-type" : "application/json; charset=UTF-8"
+        },
+        method : 'POST',
+        body : JSON.stringify(karyawan)
+    })
+    .then(res => res.text())
+    .then(teks => {
+        console.log(teks);
+        location.reload();
+    })
+    .catch(err => console.log(err));
+}
+
+let deleteKaryawan = (nik) => {
+    btnYes = document.getElementById("btnYes");
+    btnYes.addEventListener("click", () => {
+        fetch(`http://localhost:8000/api/v1/puskesmas/employe/${nik}`, {
+            method: 'DELETE'
+        })
+        .then(res => res.text())
+        .then(teks => {
+            console.log(teks);
+            location.reload();
+        })
+        .catch(err => console.log(err))
+    })
+}
 
 let viewAllData = (data) => {
     var i = 1;
@@ -16,7 +57,10 @@ let viewAllData = (data) => {
 
         btnDelete.classList.add("btn");
         btnUpdate.classList.add("btn");
-
+        btnDelete.setAttribute('data-toggle', 'modal');
+        btnDelete.setAttribute('data-target', '#modalConfirmDelete');
+        btnUpdate.setAttribute('data-toggle', 'modal');
+        btnUpdate.setAttribute('data-target', '#modalRegisterForm');
         btnDelete.classList.add("btn-danger");
         btnUpdate.classList.add("btn-primary");
 
@@ -24,16 +68,16 @@ let viewAllData = (data) => {
         btnUpdate.innerHTML = "update";
 
         btnDelete.addEventListener('click', () => {
-            deleteData(data[index].id_user);
+            deleteKaryawan(data[index].nik);
         });
 
         btnUpdate.addEventListener('click', () => {
-            getData(data[index].id_user);
+            getOneData(data[index]);
         });
         
         cellNomor.appendChild(document.createTextNode(i++));
         cell2.appendChild(document.createTextNode(data[index].nik));
-        cell3.appendChild(document.createTextNode(data[index].nama));
+        cell3.appendChild(document.createTextNode(data[index].name));
         cell4.appendChild(document.createTextNode(data[index].position));
         action.appendChild(btnUpdate);
         action.appendChild(btnDelete);
@@ -48,10 +92,46 @@ let viewAllData = (data) => {
     }
 }
 
+let updateKaryawan = () => {
+    let dataKaryawan = {
+        "name" : document.getElementById("orangeForm-name").value,
+        "position" : document.getElementById("orangeForm-position").value
+    }
+
+    fetch(`http://localhost:8000/api/v1/puskesmas/employe/${document.getElementById("orangeForm-nik").value}`, {
+        headers : {
+            "content-type" : "application/json; charset=UTF-8"
+        },
+        method : 'PUT',
+        body : JSON.stringify(dataKaryawan)
+    })
+    .then(res => res.text())
+    .then(teks => {
+        console.log(teks);
+        location.reload();
+    })
+    .catch(err => console.log(err));
+}
+
+let getOneData = (data) => {
+    document.getElementById("orangeForm-name").value = data.name;
+    document.getElementById("orangeForm-position").value = data.position;
+    document.getElementById("orangeForm-nik").value = data.nik;
+    btnAdd.classList.add("d-none");
+    btnUpdate.classList.remove("d-none");
+}
+
 let getAllData = () => {
     fetch('http://localhost:8000/api/v1/puskesmas/employe/all')
     .then((res) => res.json())
-    .then(data => viewAllData(data.response))
+    .then(data => {
+        if(data.response.length <= 0 ){
+            document.getElementById("infoEmptyData").classList.remove("d-none");
+        }
+        else {
+            viewAllData(data.response);
+        }
+    })
     .catch(err => console.log(err));
 }
 

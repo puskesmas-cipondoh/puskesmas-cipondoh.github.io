@@ -253,3 +253,7 @@ a.article:hover {
         display: none;
     }
 }
+
+button.btn.btn-md.btn-info.my-0.py-1.form-control {
+    font-size: 0.9em;
+}
