@@ -17,6 +17,9 @@
     <!-- Font Awesome JS -->
     <script src="./js/solid.js"></script>
     <script src="./js/fontawesome.js"></script>
+
+    <!-- Canvas JS -->
+    <script src="./js/canvasjs.min.js"></script>
 </head>
 
 <body>
@@ -192,9 +195,8 @@
               </table>
 
             <div class="line"></div>
-
-            <h3>Lorem Ipsum Dolor</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+            <div class="line"></div>
         </div>
     </div>
 
@@ -206,28 +208,9 @@
     <script src="./js/bootstrap.min.js"></script>
     <!-- jQuery Cuctom Scroller CDN -->
     <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
-    
-    <script type="text/javascript">
-        $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        // $(document).ready(function () {
-        //     $("#sidebar").mCustomScrollbar({
-        //         theme: "minimal"
-        //     });
+    <!-- Dashboard script -->
+    <script type="text/javascript" src="./js/dashboard.js"></script>
 
-        //     $('#sidebarCollapse').on('click', function () {
-        //         $('#sidebar').toggleClass('active');
-        //     });
-
-            // $('#sidebarCollapse').on('click', function () {
-            //     $('#sidebar, #content').toggleClass('active');
-            //     $('.collapse.in').toggleClass('in');
-            //     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-            // })
-        // })
-    
-    </script>
 </body>
 
 </html>
