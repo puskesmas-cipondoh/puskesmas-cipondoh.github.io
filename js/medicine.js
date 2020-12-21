@@ -7,22 +7,21 @@ document.getElementById('username-nav').innerHTML = localStorage.getItem('userna
 
 let btnAdd = document.getElementById("btnTambah");
 let btnUpdate = document.getElementById("btnUpdate");
-btnAdd.addEventListener("click", () => { addKaryawan() });
-btnUpdate.addEventListener("click", () => { updateKaryawan() });
+btnAdd.addEventListener("click", () => { addMedicine() });
+btnUpdate.addEventListener("click", () => { updateMedicine() });
 
-let addKaryawan = () => {
-    let karyawan = {
+let addMedicine = () => {
+    let medicine = {
         "name" : document.getElementById("orangeForm-name").value,
-        "position" : document.getElementById("orangeForm-position").value
     } 
-    console.log(JSON.stringify(karyawan));
+    console.log(JSON.stringify(medicine));
 
-    fetch('http://localhost:8000/api/v1/puskesmas/employe', {
+    fetch('https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/medicine', {
         headers : {
             "content-type" : "application/json; charset=UTF-8"
         },
         method : 'POST',
-        body : JSON.stringify(karyawan)
+        body : JSON.stringify(medicine)
     })
     .then(res => res.text())
     .then(teks => {
@@ -32,10 +31,10 @@ let addKaryawan = () => {
     .catch(err => console.log(err));
 }
 
-let deleteKaryawan = (nik) => {
+let deleteMedicine = (nik) => {
     btnYes = document.getElementById("btnYes");
     btnYes.addEventListener("click", () => {
-        fetch(`http://localhost:8000/api/v1/puskesmas/employe/${nik}`, {
+        fetch(`https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/medicine/${nik}`, {
             method: 'DELETE'
         })
         .then(res => res.text())
@@ -56,7 +55,6 @@ let viewAllData = (data) => {
         var cellNomor = document.createElement("th");
         var cell2= document.createElement("td");
         var cell3 = document.createElement("td");
-        var cell4 = document.createElement("td");
         var action = document.createElement("td");
 
         var btnDelete = document.createElement("button");
@@ -75,7 +73,7 @@ let viewAllData = (data) => {
         btnUpdate.innerHTML = "update";
 
         btnDelete.addEventListener('click', () => {
-            deleteKaryawan(data[index].nik);
+            deleteMedicine(data[index].nik);
         });
 
         btnUpdate.addEventListener('click', () => {
@@ -83,34 +81,31 @@ let viewAllData = (data) => {
         });
         
         cellNomor.appendChild(document.createTextNode(i++));
-        cell2.appendChild(document.createTextNode(data[index].nik));
+        cell2.appendChild(document.createTextNode(data[index].medicineId));
         cell3.appendChild(document.createTextNode(data[index].name));
-        cell4.appendChild(document.createTextNode(data[index].position));
         action.appendChild(btnUpdate);
         action.appendChild(btnDelete);
 
         row.appendChild(cellNomor);
         row.appendChild(cell2);
         row.appendChild(cell3);
-        row.appendChild(cell4);
         row.appendChild(action);
 
         table.appendChild(row);
     }
 }
 
-let updateKaryawan = () => {
-    let dataKaryawan = {
+let updateMedicine = () => {
+    let dataMedicine = {
         "name" : document.getElementById("orangeForm-name").value,
-        "position" : document.getElementById("orangeForm-position").value
     }
 
-    fetch(`https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/employe/${document.getElementById("orangeForm-nik").value}`, {
+    fetch(`https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/medicine/${document.getElementById("orangeForm-medicineId").value}`, {
         headers : {
             "content-type" : "application/json; charset=UTF-8"
         },
         method : 'PUT',
-        body : JSON.stringify(dataKaryawan)
+        body : JSON.stringify(dataMedicine)
     })
     .then(res => res.text())
     .then(teks => {
@@ -122,14 +117,13 @@ let updateKaryawan = () => {
 
 let getOneData = (data) => {
     document.getElementById("orangeForm-name").value = data.name;
-    document.getElementById("orangeForm-position").value = data.position;
-    document.getElementById("orangeForm-nik").value = data.nik;
+    document.getElementById("orangeForm-medicineId").value = data.medicineId;
     btnAdd.classList.add("d-none");
     btnUpdate.classList.remove("d-none");
 }
 
 let getAllData = () => {
-    fetch('https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/employe/all')
+    fetch('https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/medicine/all')
     .then((res) => res.json())
     .then(data => {
         if(data.response.length <= 0 ){

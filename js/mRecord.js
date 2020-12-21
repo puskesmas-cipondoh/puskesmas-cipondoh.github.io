@@ -17,7 +17,7 @@ let addKaryawan = () => {
     } 
     console.log(JSON.stringify(karyawan));
 
-    fetch('http://localhost:8000/api/v1/puskesmas/employe', {
+    fetch('http://localhost:8000/api/v1/puskesmas/mRecord', {
         headers : {
             "content-type" : "application/json; charset=UTF-8"
         },
@@ -35,7 +35,7 @@ let addKaryawan = () => {
 let deleteKaryawan = (nik) => {
     btnYes = document.getElementById("btnYes");
     btnYes.addEventListener("click", () => {
-        fetch(`http://localhost:8000/api/v1/puskesmas/employe/${nik}`, {
+        fetch(`http://localhost:8000/api/v1/puskesmas/mRecord/${nik}`, {
             method: 'DELETE'
         })
         .then(res => res.text())
@@ -57,6 +57,8 @@ let viewAllData = (data) => {
         var cell2= document.createElement("td");
         var cell3 = document.createElement("td");
         var cell4 = document.createElement("td");
+        var cell5 = document.createElement("td");
+        var cell6 = document.createElement("td");
         var action = document.createElement("td");
 
         var btnDelete = document.createElement("button");
@@ -75,7 +77,7 @@ let viewAllData = (data) => {
         btnUpdate.innerHTML = "update";
 
         btnDelete.addEventListener('click', () => {
-            deleteKaryawan(data[index].nik);
+            deleteKaryawan(data[index].medicalRecordId);
         });
 
         btnUpdate.addEventListener('click', () => {
@@ -83,9 +85,11 @@ let viewAllData = (data) => {
         });
         
         cellNomor.appendChild(document.createTextNode(i++));
-        cell2.appendChild(document.createTextNode(data[index].nik));
-        cell3.appendChild(document.createTextNode(data[index].name));
-        cell4.appendChild(document.createTextNode(data[index].position));
+        cell2.appendChild(document.createTextNode(data[index].medicalRecordId));
+        cell3.appendChild(document.createTextNode(data[index].physical));
+        cell4.appendChild(document.createTextNode(data[index].complaint));
+        cell5.appendChild(document.createTextNode(data[index].diagnosis));
+        cell6.appendChild(document.createTextNode(data[index].therapy));
         action.appendChild(btnUpdate);
         action.appendChild(btnDelete);
 
@@ -93,6 +97,8 @@ let viewAllData = (data) => {
         row.appendChild(cell2);
         row.appendChild(cell3);
         row.appendChild(cell4);
+        row.appendChild(cell5);
+        row.appendChild(cell6);
         row.appendChild(action);
 
         table.appendChild(row);
@@ -105,7 +111,7 @@ let updateKaryawan = () => {
         "position" : document.getElementById("orangeForm-position").value
     }
 
-    fetch(`https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/employe/${document.getElementById("orangeForm-nik").value}`, {
+    fetch(`https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/mRecord/${document.getElementById("orangeForm-nik").value}`, {
         headers : {
             "content-type" : "application/json; charset=UTF-8"
         },
@@ -129,7 +135,7 @@ let getOneData = (data) => {
 }
 
 let getAllData = () => {
-    fetch('https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/employe/all')
+    fetch('https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/mRecord/all')
     .then((res) => res.json())
     .then(data => {
         if(data.response.length <= 0 ){

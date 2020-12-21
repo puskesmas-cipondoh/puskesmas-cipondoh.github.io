@@ -26,20 +26,23 @@
  </div>
  <div class="main">
     <div class="col-md-6 col-sm-12">
-       <div class="login-form">
-          <form>
-             <div class="form-group">
-                <label>User Name</label>
-                <input type="text" class="form-control" placeholder="User Name">
-             </div>
-             <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" placeholder="Password">
-             </div>
-             <button type="submit" class="btn btn-info">Login</button>
-             <button type="submit" class="btn btn-secondary">Register</button>
-          </form>
-       </div>
+         <div class="alert alert-warning" role="alert" id="alert">
+         Email atau Password anda salah!
+         </div>
+         <div class="login-form">
+            <div>
+               <div class="form-group">
+                  <label>Username</label>
+                  <input type="text" class="form-control" id="username" placeholder="User Name">
+               </div>
+               <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Password">
+               </div>
+               <button type="submit" id="submit" class="btn btn-info">Login</button>
+               <!-- <button type="submit" id="regist" class="btn btn-secondary">Register</button> -->
+            </div>
+         </div>
     </div>
  </div>
 
@@ -51,6 +54,8 @@
     <script src="./js/bootstrap.min.js"></script>
     <!-- jQuery Cuctom Scroller CDN -->
     <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Login -->
+    <script src="./js/login.js"></script>
     
     <script type="text/javascript">
         $('#sidebarCollapse').on('click', function () {

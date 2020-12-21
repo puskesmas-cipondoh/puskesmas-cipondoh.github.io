@@ -1,4 +1,10 @@
 window.onload = function () {
+    if (!localStorage.getItem('accessToken')) {
+      window.location.href = "login.html";
+      console.log("pindah ke index.html")
+    }
+
+    document.getElementById('username-nav').innerHTML = localStorage.getItem('username')
     var chart = new CanvasJS.Chart("chartContainer", {
       title:{
         text: "My First Chart in CanvasJS"              

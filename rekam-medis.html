@@ -45,12 +45,12 @@
                         <li>
                             <a href="pasien.html">Biodata</a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="rekam-medis.html">Rekam Medis</a>
                         </li>
                     </ul>
                 </li>
-                <li class="active">
+                <li >
                     <a href="employe.html">
                         <i class="fas fa-user-md"></i>
                         Karyawan
@@ -104,10 +104,10 @@
             <nav aria-label="breadcrumb">
                 <div class="row">
                     <div class="col-md-6">
-                        <h2>Karyawan</h2>
+                        <h2>Pasien</h2>
                     </div>
                     <div class="col-md-2 text-right">
-                        <button class="btn btn-md btn-info my-0 py-1 form-control" data-toggle="modal" data-target="#modalRegisterForm">New Karyawan</button>
+                        <button class="btn btn-md btn-info my-0 py-1 form-control" data-toggle="modal" data-target="#modalRegisterForm">New Rekam Medis</button>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group md-form form-sm form-2 pl-0">
@@ -121,7 +121,7 @@
                 </div>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Karyawan</li>
+                    <li class="breadcrumb-item active" aria-current="page">Rekam Medis</li>
                 </ol>
             </nav>
 
@@ -129,16 +129,18 @@
                 <thead>
                   <tr>
                     <th scope="col">No</th>
-                    <th scope="col">NIK</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Position</th>
+                    <th scope="col">ID Rekam Medis</th>
+                    <th scope="col">Cek Fisik</th>
+                    <th scope="col">Keluhan</th>
+                    <th scope="col">Diagnosa</th>
+                    <th scope="col">Teraphy</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                 </tbody>
               </table>
-              <p class="text-center d-none" id="infoEmptyData">Empty Karyawan</p>
+              <p class="text-center d-none" id="infoEmptyData">Empty Pasien</p>
             <div class="line"></div>
 
             <h3>Lorem Ipsum Dolor</h3>
@@ -157,16 +159,17 @@
                 </div>
                 <div class="modal-body mx-3">
                     <div class="form-group">
-                        <input type="text" id="orangeForm-name" class="form-control" placeholder="Your Name">
-                        <input type="hidden" id="orangeForm-nik" class="form-control">
+                        <textarea id="orangeForm-physical" class="form-control" placeholder="Physical Test"></textarea>
+                        <input type="hidden" id="orangeForm-medicalRecordId" class="form-control">
                     </div>
                     <div class="form-group">
-                        <select class="custom-select custom-select-md mb-3" id="orangeForm-position">
-                            <option selected>Open this select menu Position</option>
-                            <option value="DOKTER">DOKTER</option>
-                            <option value="ADMIN">ADMIN</option>
-                            <option value="KASIR">KASIR</option>
-                        </select>
+                        <textarea id="orangeForm-complaint" class="form-control" placeholder="Complaint"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="orangeForm-diagnosis" class="form-control" placeholder="Diagnosis"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="orangeForm-therapy" class="form-control" placeholder="Therapy"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
@@ -224,7 +227,7 @@
           location.reload();
         })
     </script>
-    <script src="./js/employe.js"></script>
+    <script src="./js/mRecord.js"></script>
     
     <script type="text/javascript">
         $('#sidebarCollapse').on('click', function () {

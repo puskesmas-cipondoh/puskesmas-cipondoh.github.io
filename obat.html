@@ -50,13 +50,13 @@
                         </li>
                     </ul>
                 </li>
-                <li class="active">
+                <li>
                     <a href="employe.html">
                         <i class="fas fa-user-md"></i>
                         Karyawan
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="obat.html">
                         <i class="fas fa-pills"></i>
                         Obat
@@ -104,10 +104,10 @@
             <nav aria-label="breadcrumb">
                 <div class="row">
                     <div class="col-md-6">
-                        <h2>Karyawan</h2>
+                        <h2>Obat</h2>
                     </div>
                     <div class="col-md-2 text-right">
-                        <button class="btn btn-md btn-info my-0 py-1 form-control" data-toggle="modal" data-target="#modalRegisterForm">New Karyawan</button>
+                        <button class="btn btn-md btn-info my-0 py-1 form-control" data-toggle="modal" data-target="#modalRegisterForm">New Obat</button>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group md-form form-sm form-2 pl-0">
@@ -121,7 +121,7 @@
                 </div>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Karyawan</li>
+                    <li class="breadcrumb-item active" aria-current="page">Obat</li>
                 </ol>
             </nav>
 
@@ -129,16 +129,15 @@
                 <thead>
                   <tr>
                     <th scope="col">No</th>
-                    <th scope="col">NIK</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Position</th>
+                    <th scope="col">ID Obat</th>
+                    <th scope="col">Nama Obat</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                 </tbody>
               </table>
-              <p class="text-center d-none" id="infoEmptyData">Empty Karyawan</p>
+              <p class="text-center d-none" id="infoEmptyData">Empty Obat</p>
             <div class="line"></div>
 
             <h3>Lorem Ipsum Dolor</h3>
@@ -150,23 +149,15 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">New Karyawan</h4>
+                    <h4 class="modal-title w-100 font-weight-bold">New Obat</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body mx-3">
                     <div class="form-group">
-                        <input type="text" id="orangeForm-name" class="form-control" placeholder="Your Name">
-                        <input type="hidden" id="orangeForm-nik" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <select class="custom-select custom-select-md mb-3" id="orangeForm-position">
-                            <option selected>Open this select menu Position</option>
-                            <option value="DOKTER">DOKTER</option>
-                            <option value="ADMIN">ADMIN</option>
-                            <option value="KASIR">KASIR</option>
-                        </select>
+                        <input type="text" id="orangeForm-name" class="form-control" placeholder="Medicine Name">
+                        <input type="hidden" id="orangeForm-medicineId" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
@@ -224,7 +215,7 @@
           location.reload();
         })
     </script>
-    <script src="./js/employe.js"></script>
+    <script src="./js/medicine.js"></script>
     
     <script type="text/javascript">
         $('#sidebarCollapse').on('click', function () {
