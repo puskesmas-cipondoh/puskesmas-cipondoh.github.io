@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Puskesmas Cipondoh</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="./css/style4.css">
+
+    <!-- Font Awesome JS -->
+    <script src="./js/solid.js"></script>
+    <script src="./js/fontawesome.js"></script>
+
+    <!-- Canvas JS -->
+    <script src="./js/canvasjs.min.js"></script>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Puskesmas Cipondoh</h3>
+                <strong>PC</strong>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                  <a href="queue.html">
+                      <i class="fas fa-clipboard-list"></i>
+                      Antrian
+                  </a>
+                </li>
+                <li>
+                    <a href="pasien.html">
+                        <i class="fas fa-users"></i>
+                        Pasien
+                    </a>
+                </li>
+                <li>
+                    <a href="rekam-medis.html">
+                        <i class="fas fa-user-md"></i>
+                        Rekam Medis
+                    </a>
+                </li>
+                <li>
+                    <a href="employe.html">
+                        <i class="fas fa-user-md"></i>
+                        Karyawan
+                    </a>
+                </li>
+                <li>
+                    <a href="obat.html">
+                        <i class="fas fa-pills"></i>
+                        Obat
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-paper-plane"></i>
+                        About
+                    </a>
+                </li>
+            </ul>
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="#" id="logout">
+                        <i class="fas fa-power-off"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" id="username-nav" href="#">Wahyu</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <nav aria-label="breadcrumb">
+                <h2>Dashboard</h2>
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+              </nav>
+
+            <div class="line"></div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">8</h5>
+                      <p class="card-text">Antrian Hari ini</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">100</h5>
+                      <p class="card-text">Total Pasien</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">5</h5>
+                        <p class="card-text">Total Poli</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">2</h5>
+                        <p class="card-text">Konsltasi Belum Terjawab</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="line"></div>
+
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Kode Antrian</th>
+                    <th scope="col">Nama Poli</th>
+                    <th scope="col">Nama Pasien</th>
+                    <th scope="col">No Pendaftaran</th>
+                    <th scope="col">No Antrian</th>
+                    <th scope="col">Status Antrian</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>121212</td>
+                    <td>Umum</td>
+                    <td>Mark</td>
+                    <td>hbnvfd783231</td>
+                    <td>029121312313</td>
+                    <td>antri</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>3124222</td>
+                    <td>Umum</td>
+                    <td>@fat</td>
+                    <td>hbnvfd783231</td>
+                    <td>029121312313</td>
+                    <td>antri</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>2221211</td>
+                    <td>Umum</td>
+                    <td>@twitter</td>
+                    <td>hbnvfd783231</td>
+                    <td>029121312313</td>
+                    <td>antri</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            <div class="line"></div>
+            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+            <div class="line"></div>
+        </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="./js/jquery-3.5.1.slim.min.js"></script>
+    <!-- Popper.JS -->
+    <script src="./js/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="./js/bootstrap.min.js"></script>
+    <!-- jQuery Cuctom Scroller CDN -->
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Dashboard script -->
+    <script type="text/javascript">
+      var logout = document.getElementById('logout')
+      logout.addEventListener('click', () => {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('username');
+        location.reload();
+      })
+    </script>
+    <script type="text/javascript" src="./js/dashboard.js"></script>
+
+</body>
+
+</html>

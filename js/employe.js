@@ -17,7 +17,7 @@ let addKaryawan = () => {
     } 
     console.log(JSON.stringify(karyawan));
 
-    fetch('http://localhost:8000/api/v1/puskesmas/employe', {
+    fetch('https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/employe', {
         headers : {
             "content-type" : "application/json; charset=UTF-8"
         },
@@ -35,7 +35,7 @@ let addKaryawan = () => {
 let deleteKaryawan = (nik) => {
     btnYes = document.getElementById("btnYes");
     btnYes.addEventListener("click", () => {
-        fetch(`http://localhost:8000/api/v1/puskesmas/employe/${nik}`, {
+        fetch(`https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/employe/${nik}`, {
             method: 'DELETE'
         })
         .then(res => res.text())

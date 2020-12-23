@@ -17,14 +17,12 @@
     <!-- Font Awesome JS -->
     <script src="./js/solid.js"></script>
     <script src="./js/fontawesome.js"></script>
-
-    <!-- Canvas JS -->
-    <script src="./js/canvasjs.min.js"></script>
 </head>
 
 <body>
 
     <div class="wrapper">
+        
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
@@ -33,27 +31,31 @@
             </div>
 
             <ul class="list-unstyled components">
-                <li class="active">
+                <!-- <li>
                     <a href="index.html">
                         <i class="fas fa-home"></i>
                         Dashboard
                     </a>
+                </li> -->
+                <li class="active">
+                    <a href="index.html">
+                        <i class="fas fa-clipboard-list"></i>
+                        Antrian
+                    </a>
                 </li>
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <a href="pasien.html">
                         <i class="fas fa-users"></i>
                         Pasien
                     </a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="pasien.html">Biodata</a>
-                        </li>
-                        <li>
-                            <a href="rekam-medis.html">Rekam Medis</a>
-                        </li>
-                    </ul>
                 </li>
                 <li>
+                    <a href="rekam-medis.html">
+                        <i class="fas fa-user-md"></i>
+                        Rekam Medis
+                    </a>
+                </li>
+                <!-- <li >
                     <a href="employe.html">
                         <i class="fas fa-user-md"></i>
                         Karyawan
@@ -64,7 +66,7 @@
                         <i class="fas fa-pills"></i>
                         Obat
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="#">
                         <i class="fas fa-paper-plane"></i>
@@ -84,6 +86,9 @@
 
         <!-- Page Content  -->
         <div id="content">
+            <div class="alert alert-warning" role="alert" id="alert">
+                Data Pasien Belum Terdaftar, Klik <a class="alert-link" href="pasien.html">disini</a> Untuk mendaftar
+            </div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
@@ -105,99 +110,107 @@
             </nav>
 
             <nav aria-label="breadcrumb">
-                <h2>Dashboard</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Antrian</h2>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <button 
+                        class="btn btn-md btn-info my-0 py-1 form-control" 
+                        data-toggle="modal" 
+                        data-target="#modalRegisterForm">
+                        New Antrian
+                    </button>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group md-form form-sm form-2 pl-0">
+                            <input class="form-control my-0 py-1 red-border" type="text" placeholder="Search" aria-label="Search">
+                            <div class="input-group-append">
+                              <span class="input-group-text red lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
+                                  aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Antrian</li>
                 </ol>
-              </nav>
-
-            <div class="line"></div>
-
-            <div class="row">
-                <div class="col-sm-3">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">8</h5>
-                      <p class="card-text">Antrian Hari ini</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">100</h5>
-                      <p class="card-text">Total Pasien</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">5</h5>
-                        <p class="card-text">Total Poli</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">2</h5>
-                        <p class="card-text">Konsltasi Belum Terjawab</p>
-                      </div>
-                    </div>
-                  </div>
-            </div>
-
-            <div class="line"></div>
+            </nav>
 
             <table class="table table-hover">
                 <thead>
                   <tr>
                     <th scope="col">No</th>
-                    <th scope="col">Kode Antrian</th>
-                    <th scope="col">Nama Poli</th>
-                    <th scope="col">Nama Pasien</th>
-                    <th scope="col">No Pendaftaran</th>
-                    <th scope="col">No Antrian</th>
-                    <th scope="col">Status Antrian</th>
+                    <th scope="col">Patient ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>121212</td>
-                    <td>Umum</td>
-                    <td>Mark</td>
-                    <td>hbnvfd783231</td>
-                    <td>029121312313</td>
-                    <td>antri</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>3124222</td>
-                    <td>Umum</td>
-                    <td>@fat</td>
-                    <td>hbnvfd783231</td>
-                    <td>029121312313</td>
-                    <td>antri</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>2221211</td>
-                    <td>Umum</td>
-                    <td>@twitter</td>
-                    <td>hbnvfd783231</td>
-                    <td>029121312313</td>
-                    <td>antri</td>
-                  </tr>
                 </tbody>
               </table>
-
-            <div class="line"></div>
-            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+              <p class="text-center d-none" id="infoEmptyData">Empty Antrian</p>
             <div class="line"></div>
         </div>
+
+        <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">New Antrian</h4>
+                    <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="form-group">
+                        <input type="text" id="orangeForm-patientId" class="form-control" placeholder="Patient ID">
+                        <input type="hidden" id="orangeForm-queueId" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button class="btn btn-warning" id="btnTambah">Tambah</button>
+                    <button class="btn btn-warning d-none" id="btnUpdate">Update</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--Modal: modalConfirmDelete-->
+        <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+            <!--Content-->
+            <div class="modal-content text-center">
+                <!--Header-->
+                <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Panggil Pasien?</p>
+                </div>
+        
+                <!--Body-->
+                <div class="modal-body">
+        
+                <i class="fas fa-times fa-4x animated rotateIn"></i>
+        
+                </div>
+        
+                <!--Footer-->
+                <div class="modal-footer flex-center">
+                <a href="#" class="btn btn-outline-danger" id="btnYes">Yes</a>
+                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
+                </div>
+            </div>
+            <!--/.Content-->
+            </div>
+        </div>
+        <!--Modal: modalConfirmDelete-->
     </div>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
@@ -208,17 +221,38 @@
     <script src="./js/bootstrap.min.js"></script>
     <!-- jQuery Cuctom Scroller CDN -->
     <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <!-- Dashboard script -->
+    <!-- Custom Script -->
     <script type="text/javascript">
-      var logout = document.getElementById('logout')
-      logout.addEventListener('click', () => {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('username');
-        location.reload();
-      })
+        var logout = document.getElementById('logout')
+        logout.addEventListener('click', () => {
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('username');
+          location.reload();
+        })
     </script>
-    <script type="text/javascript" src="./js/dashboard.js"></script>
+    <script src="./js/queue.js"></script>
+    
+    <script type="text/javascript">
+        $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        // $(document).ready(function () {
+        //     $("#sidebar").mCustomScrollbar({
+        //         theme: "minimal"
+        //     });
 
+        //     $('#sidebarCollapse').on('click', function () {
+        //         $('#sidebar').toggleClass('active');
+        //     });
+
+            // $('#sidebarCollapse').on('click', function () {
+            //     $('#sidebar, #content').toggleClass('active');
+            //     $('.collapse.in').toggleClass('in');
+            //     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            // })
+        // })
+    
+    </script>
 </body>
 
 </html>

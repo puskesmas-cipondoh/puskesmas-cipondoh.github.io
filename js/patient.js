@@ -7,8 +7,24 @@ document.getElementById('username-nav').innerHTML = localStorage.getItem('userna
 
 let btnAdd = document.getElementById("btnTambah");
 let btnUpdate = document.getElementById("btnUpdate");
+let searchPatient = document.getElementById('searchPatient')
 btnAdd.addEventListener("click", () => { addKaryawan() });
 btnUpdate.addEventListener("click", () => { updateKaryawan() });
+
+searchPatient.addEventListener('keyup', (event) => {
+    if(event.keyCode === 13){
+        console.log(searchPatient.value);
+        // document.getElementById('btnShowModal').classList.add('d-none')
+        // document.getElementById('profileName').innerHTML = '';
+        // document.getElementById('profileAlamat').innerHTML = '';
+        // document.getElementById('profileUmur').innerHTML = '';
+        // document.getElementById('profilePekerjaan').innerHTML = 'Data Tidak Ditemukan';
+        var table = document.getElementsByTagName('tbody')[0];
+        table.innerHTML = null;
+        getSearchData(searchPatient.value)
+    }
+})
+
 
 let addKaryawan = () => {
     let karyawan = {
@@ -63,18 +79,22 @@ let viewAllData = (data) => {
 
         var btnDelete = document.createElement("button");
         var btnUpdate = document.createElement("button");
+        var btnAddQueue = document.createElement("button");
 
         btnDelete.classList.add("btn");
         btnUpdate.classList.add("btn");
+        btnAddQueue.classList.add("btn");
         btnDelete.setAttribute('data-toggle', 'modal');
         btnDelete.setAttribute('data-target', '#modalConfirmDelete');
         btnUpdate.setAttribute('data-toggle', 'modal');
         btnUpdate.setAttribute('data-target', '#modalRegisterForm');
         btnDelete.classList.add("btn-danger");
         btnUpdate.classList.add("btn-primary");
+        btnAddQueue.classList.add("btn-info");
 
-        btnDelete.innerHTML = "delete";
-        btnUpdate.innerHTML = "update";
+        btnDelete.innerHTML = "Delete";
+        btnUpdate.innerHTML = "Update";
+        btnAddQueue.innerHTML = "Antrian";
 
         btnDelete.addEventListener('click', () => {
             deleteKaryawan(data[index].nik);
@@ -90,6 +110,7 @@ let viewAllData = (data) => {
         cell4.appendChild(document.createTextNode(data[index].address));
         cell5.appendChild(document.createTextNode(data[index].age));
         action.appendChild(btnUpdate);
+        action.appendChild(btnAddQueue);
         action.appendChild(btnDelete);
 
         row.appendChild(cellNomor);
@@ -135,6 +156,20 @@ let getOneData = (data) => {
 
 let getAllData = () => {
     fetch('https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/patient/all')
+    .then((res) => res.json())
+    .then(data => {
+        if(data.response.length <= 0 ){
+            document.getElementById("infoEmptyData").classList.remove("d-none");
+        }
+        else {
+            viewAllData(data.response);
+        }
+    })
+    .catch(err => console.log(err));
+}
+
+let getSearchData = (patientName) => {
+    fetch(`https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/patient/search/${patientName}`)
     .then((res) => res.json())
     .then(data => {
         if(data.response.length <= 0 ){

@@ -30,31 +30,33 @@
             </div>
 
             <ul class="list-unstyled components">
-                <!-- <li>
+                <li>
                     <a href="index.html">
                         <i class="fas fa-home"></i>
                         Dashboard
                     </a>
-                </li> -->
+                </li>
                 <li>
-                    <a href="index.html">
+                    <a href="queue.html">
                         <i class="fas fa-clipboard-list"></i>
                         Antrian
                     </a>
                 </li>
                 <li>
-                    <a href="pasien.html">
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-users"></i>
                         Pasien
                     </a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li class="active">
+                            <a href="pasien.html">Biodata</a>
+                        </li>
+                        <li>
+                            <a href="rekam-medis.html">Rekam Medis</a>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="rekam-medis.html">
-                        <i class="fas fa-user-md"></i>
-                        Rekam Medis
-                    </a>
-                </li>
-                <!-- <li >
+                <li >
                     <a href="employe.html">
                         <i class="fas fa-user-md"></i>
                         Karyawan
@@ -65,7 +67,7 @@
                         <i class="fas fa-pills"></i>
                         Obat
                     </a>
-                </li> -->
+                </li>
                 <li>
                     <a href="#">
                         <i class="fas fa-paper-plane"></i>
@@ -105,46 +107,30 @@
                 </div>
             </nav>
 
-            <nav aria-label="breadcrumb">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h2>Pasien</h2>
-                    </div>
-                    <div class="col-md-2 text-right">
-                        <button class="btn btn-md btn-info my-0 py-1 form-control" data-toggle="modal" data-target="#modalRegisterForm">New Pasien</button>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group md-form form-sm form-2 pl-0">
-                            <input class="form-control my-0 py-1 red-border" type="text" id="searchPatient" placeholder="Search" aria-label="Search">
-                            <div class="input-group-append">
-                              <span class="input-group-text red lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
-                                  aria-hidden="true"></i></span>
-                            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <h4>Biodata</h4>
+                    <div class="card" >
+                        <div class="card-body">
+                            <h5 class="card-title">Wahyu Aris Munandar</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Pegawai Swasta</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">20 Th</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Tangerang</h6>
                         </div>
                     </div>
                 </div>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Pasien</li>
-                </ol>
-            </nav>
+                <div class="col-md-4">
+                    <h4>Riwayat Berobat</h4>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active">21-12-2020</a>
+                        <a href="#" class="list-group-item list-group-item-action">12-12-2020</a>
+                        <a href="#" class="list-group-item list-group-item-action">23-09-2019</a>
+                        <a href="#" class="list-group-item list-group-item-action">11-10-2017</a>
+                        <a href="#" class="list-group-item list-group-item-action">01-09-2017</a>
+                      </div>
+                </div>
+            </div>
 
-            <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">ID Pasien</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Umur</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-              <p class="text-center d-none" id="infoEmptyData">Empty Pasien</p>
-            <div class="line"></div>
         </div>
 
         <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -152,7 +138,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">New Pasien</h4>
+                    <h4 class="modal-title w-100 font-weight-bold">New Karyawan</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -216,7 +202,7 @@
     <!-- jQuery Cuctom Scroller CDN -->
     <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
     <!-- Custom Script -->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         var logout = document.getElementById('logout')
         logout.addEventListener('click', () => {
           localStorage.removeItem('accessToken');
@@ -224,7 +210,7 @@
           location.reload();
         })
     </script>
-    <script src="./js/patient.js"></script>
+    <script src="./js/patient.js"></script> -->
     
     <script type="text/javascript">
         $('#sidebarCollapse').on('click', function () {
