@@ -1,3 +1,5 @@
+var spinHandle = loadingOverlay.activate();
+
 if (!localStorage.getItem('accessToken')) {
     window.location.href = "login.html";
     console.log("pindah ke index.html")
@@ -26,6 +28,7 @@ searchPatient.addEventListener('keyup', (event) => {
 })
 
 let addRecord = () => {
+    spinHandle = loadingOverlay.activate();
     let record = {
         "physical" : document.getElementById("orangeForm-physical").value,
         "complaint" : document.getElementById("orangeForm-complaint").value,
@@ -53,6 +56,7 @@ let addRecord = () => {
 let deleteRecord = (nik) => {
     btnYes = document.getElementById("btnYes");
     btnYes.addEventListener("click", () => {
+        spinHandle = loadingOverlay.activate();
         fetch(`https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/mRecord/${nik}`, {
             method: 'DELETE'
         })
@@ -61,7 +65,10 @@ let deleteRecord = (nik) => {
             console.log(teks);
             location.reload();
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            loadingOverlay.cancel(spinHandle);
+            console.log(err)
+        });
     })
 }
 
@@ -125,15 +132,19 @@ let viewAllData = (data) => {
 
         table.appendChild(row);
     }
+    loadingOverlay.cancel(spinHandle);
 }
 
 let updateRecord = () => {
+    spinHandle = loadingOverlay.activate();
     let dataRecord = {
-        "name" : document.getElementById("orangeForm-name").value,
-        "position" : document.getElementById("orangeForm-position").value
+        "physical" : document.getElementById("orangeForm-physical").value,
+        "complaint" : document.getElementById("orangeForm-complaint").value,
+        "diagnosis" : document.getElementById("orangeForm-diagnosis").value,
+        "therapy" : document.getElementById("orangeForm-therapy").value,
     }
 
-    fetch(`https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/mRecord/${document.getElementById("orangeForm-nik").value}`, {
+    fetch(`https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/mRecord/${document.getElementById("orangeForm-medicalRecordId").value}`, {
         headers : {
             "content-type" : "application/json; charset=UTF-8"
         },
@@ -145,13 +156,18 @@ let updateRecord = () => {
         console.log(teks);
         location.reload();
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        loadingOverlay.cancel(spinHandle);
+        console.log(err)
+    });
 }
 
 let getOneData = (data) => {
-    document.getElementById("orangeForm-name").value = data.name;
-    document.getElementById("orangeForm-position").value = data.position;
-    document.getElementById("orangeForm-nik").value = data.nik;
+    document.getElementById("orangeForm-physical").value = data.physical;
+    document.getElementById("orangeForm-complaint").value = data.complaint;
+    document.getElementById("orangeForm-diagnosis").value = data.diagnosis;
+    document.getElementById("orangeForm-therapy").value = data.therapy;
+    document.getElementById("orangeForm-medicalRecordId").value = data.medicalRecordId;
     btnAdd.classList.add("d-none");
     btnUpdate.classList.remove("d-none");
 }
@@ -163,13 +179,18 @@ let getAllData = (patientId) => {
         dataPatient = data;
         console.log(data)
         if(data.response[0].length <= 0 ){
+            loadingOverlay.cancel(spinHandle);
             document.getElementById("infoEmptyData").classList.remove("d-none");
         }
         else {
             viewAllData(data.response[0]);
         }
+        loadingOverlay.cancel(spinHandle);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        loadingOverlay.cancel(spinHandle);
+        console.log(err)
+    });
 }
 
 getAllData(patientId);

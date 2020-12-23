@@ -1,3 +1,5 @@
+var spinHandle = loadingOverlay.activate();
+
 if (!localStorage.getItem('accessToken')) {
     window.location.href = "login.html";
     console.log("pindah ke index.html")
@@ -8,17 +10,14 @@ document.getElementById('username-nav').innerHTML = localStorage.getItem('userna
 let btnAdd = document.getElementById("btnTambah");
 let btnUpdate = document.getElementById("btnUpdate");
 let searchPatient = document.getElementById('searchPatient')
-btnAdd.addEventListener("click", () => { addKaryawan() });
-btnUpdate.addEventListener("click", () => { updateKaryawan() });
+let alertInfo = document.getElementById("alert");
+alertInfo.classList.add('hide');
+btnAdd.addEventListener("click", () => { addPatient() });
+btnUpdate.addEventListener("click", () => { updatePatient() });
 
 searchPatient.addEventListener('keyup', (event) => {
     if(event.keyCode === 13){
         console.log(searchPatient.value);
-        // document.getElementById('btnShowModal').classList.add('d-none')
-        // document.getElementById('profileName').innerHTML = '';
-        // document.getElementById('profileAlamat').innerHTML = '';
-        // document.getElementById('profileUmur').innerHTML = '';
-        // document.getElementById('profilePekerjaan').innerHTML = 'Data Tidak Ditemukan';
         var table = document.getElementsByTagName('tbody')[0];
         table.innerHTML = null;
         getSearchData(searchPatient.value)
@@ -26,32 +25,37 @@ searchPatient.addEventListener('keyup', (event) => {
 })
 
 
-let addKaryawan = () => {
-    let karyawan = {
+let addPatient = () => {
+    spinHandle = loadingOverlay.activate();
+    let patient = {
         "name" : document.getElementById("orangeForm-name").value,
         "address" : document.getElementById("orangeForm-address").value,
         "age" : document.getElementById("orangeForm-age").value
     } 
-    console.log(JSON.stringify(karyawan));
+    console.log(JSON.stringify(patient));
 
     fetch('https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/patient', {
         headers : {
             "content-type" : "application/json; charset=UTF-8"
         },
         method : 'POST',
-        body : JSON.stringify(karyawan)
+        body : JSON.stringify(patient)
     })
     .then(res => res.text())
     .then(teks => {
         console.log(teks);
         location.reload();
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        loadingOverlay.cancel(spinHandle);
+        console.log(err)
+    });
 }
 
-let deleteKaryawan = (nik) => {
+let deletePatient = (nik) => {
     btnYes = document.getElementById("btnYes");
     btnYes.addEventListener("click", () => {
+        spinHandle = loadingOverlay.activate();
         fetch(`https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/patient/${nik}`, {
             method: 'DELETE'
         })
@@ -60,8 +64,36 @@ let deleteKaryawan = (nik) => {
             console.log(teks);
             location.reload();
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            loadingOverlay.cancel(spinHandle);
+            console.log(err)
+        });
     })
+}
+
+let addQueue = (patientId) => {
+    spinHandle = loadingOverlay.activate();
+    let queue = {
+        "patientId" : patientId
+    } 
+    console.log(JSON.stringify(queue));
+
+    fetch('https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/queue', {
+        headers : {
+            "content-type" : "application/json; charset=UTF-8"
+        },
+        method : 'POST',
+        body : JSON.stringify(queue)
+    })
+    .then(res => res.json())
+    .then(teks => {
+        alertInfo.classList.remove('hide');
+        loadingOverlay.cancel(spinHandle);
+    })
+    .catch(err => {
+        loadingOverlay.cancel(spinHandle);
+        console.log('error')
+    });
 }
 
 let viewAllData = (data) => {
@@ -97,11 +129,15 @@ let viewAllData = (data) => {
         btnAddQueue.innerHTML = "Antrian";
 
         btnDelete.addEventListener('click', () => {
-            deleteKaryawan(data[index].nik);
+            deletePatient(data[index].patientId);
         });
 
         btnUpdate.addEventListener('click', () => {
             getOneData(data[index]);
+        });
+
+        btnAddQueue.addEventListener('click', () => {
+            addQueue(data[index].patientId);
         });
         
         cellNomor.appendChild(document.createTextNode(i++));
@@ -122,10 +158,12 @@ let viewAllData = (data) => {
 
         table.appendChild(row);
     }
+    loadingOverlay.cancel(spinHandle);
 }
 
-let updateKaryawan = () => {
-    let dataKaryawan = {
+let updatePatient = () => {
+    spinHandle = loadingOverlay.activate();
+    let dataPatient = {
         "name" : document.getElementById("orangeForm-name").value,
         "address" : document.getElementById("orangeForm-address").value,
         "age" : document.getElementById("orangeForm-age").value
@@ -136,20 +174,24 @@ let updateKaryawan = () => {
             "content-type" : "application/json; charset=UTF-8"
         },
         method : 'PUT',
-        body : JSON.stringify(dataKaryawan)
+        body : JSON.stringify(dataPatient)
     })
     .then(res => res.text())
     .then(teks => {
         console.log(teks);
         location.reload();
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        loadingOverlay.cancel(spinHandle);
+        console.log(err)
+    });
 }
 
 let getOneData = (data) => {
     document.getElementById("orangeForm-name").value = data.name;
-    document.getElementById("orangeForm-position").value = data.position;
-    document.getElementById("orangeForm-nik").value = data.nik;
+    document.getElementById("orangeForm-address").value = data.address;
+    document.getElementById("orangeForm-age").value = data.age;
+    document.getElementById("orangeForm-patientId").value = data.patientId;
     btnAdd.classList.add("d-none");
     btnUpdate.classList.remove("d-none");
 }
@@ -165,10 +207,14 @@ let getAllData = () => {
             viewAllData(data.response);
         }
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        loadingOverlay.cancel(spinHandle);
+        console.log(err)
+    });
 }
 
 let getSearchData = (patientName) => {
+    spinHandle = loadingOverlay.activate();
     fetch(`https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/patient/search/${patientName}`)
     .then((res) => res.json())
     .then(data => {
@@ -178,8 +224,12 @@ let getSearchData = (patientName) => {
         else {
             viewAllData(data.response);
         }
+        loadingOverlay.cancel(spinHandle);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        loadingOverlay.cancel(spinHandle);
+        console.log(err)
+    });
 }
 
 getAllData();

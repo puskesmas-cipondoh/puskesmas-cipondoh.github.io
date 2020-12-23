@@ -1,3 +1,5 @@
+var spinHandle = loadingOverlay.activate();
+
 if (!localStorage.getItem('accessToken')) {
     window.location.href = "login.html";
     console.log("pindah ke index.html")
@@ -14,6 +16,7 @@ btnAdd.addEventListener("click", () => { addQueue() });
 // btnPanggil.addEventListener("click", () => { updateQueue() });
 
 let addQueue = () => {
+    spinHandle = loadingOverlay.activate();
     let queue = {
         "patientId" : document.getElementById("orangeForm-patientId").value
     } 
@@ -29,6 +32,15 @@ let addQueue = () => {
     .then(res => res.json())
     .then(teks => {
         if (teks.status == 'error'){
+            if(teks.response == 'Validation error'){
+                alertInfo.innerHTML = "Pasien Sudah Masuk Antrian";
+                console.log(teks.response)
+            } else {
+                alertInfo.innerHTML = "Pasien Belum Terdaftar";
+                console.log(teks.response)
+            }
+
+            loadingOverlay.cancel(spinHandle);
             alertInfo.classList.remove('hide');
             document.getElementById('closeModal').click();
         } else {
@@ -36,14 +48,17 @@ let addQueue = () => {
         }
     })
     .catch(err => {
+        loadingOverlay.cancel(spinHandle);
         console.log('error')
-        alertInfo.classList.add("show");
+        alertInfo.innerHTML = "404";
+        alertInfo.classList.remove('hide');
     });
 }
 
 let deleteQueue = (queueId) => {
     btnYes = document.getElementById("btnYes");
     btnYes.addEventListener("click", () => {
+        spinHandle = loadingOverlay.activate();
         fetch(`https://guarded-crag-15965.herokuapp.com/api/v1/puskesmas/queue/${queueId}`, {
             method: 'DELETE'
         })
@@ -101,6 +116,7 @@ let viewAllData = (data) => {
 
         table.appendChild(row);
     }
+    loadingOverlay.cancel(spinHandle);
 }
 
 let updateQueue = () => {
@@ -121,7 +137,10 @@ let updateQueue = () => {
         console.log(teks);
         location.reload();
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        loadingOverlay.cancel(spinHandle);
+        console.log(err)
+    });
 }
 
 // let getOneData = (data) => {
@@ -137,13 +156,17 @@ let getAllData = () => {
     .then((res) => res.json())
     .then(data => {
         if(data.response.length <= 0 ){
+            loadingOverlay.cancel(spinHandle);
             document.getElementById("infoEmptyData").classList.remove("d-none");
         }
         else {
             viewAllData(data.response);
         }
     })
-    .catch(err => console.log(err));
+    .catch(err =>{
+        loadingOverlay.cancel(spinHandle);
+        console.log(err)
+    });
 }
 
 getAllData();
