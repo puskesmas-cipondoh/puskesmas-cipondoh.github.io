@@ -6,7 +6,7 @@ if (!localStorage.getItem('accessToken')) {
 }
 let dataPasien = {};
 let alertInfo = document.getElementById("alert");
-alertInfo.classList.add(localStorage.getItem('alert'));
+alertInfo.classList.add('hide');
 
 document.getElementById('username-nav').innerHTML = localStorage.getItem('username')
 
