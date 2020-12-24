@@ -5,6 +5,7 @@ if (!localStorage.getItem('accessToken')) {
     console.log("pindah ke index.html")
 }
 let dataPasien = {};
+
 let alertInfo = document.getElementById("alert");
 alertInfo.classList.add('hide');
 
@@ -51,7 +52,7 @@ let addQueue = () => {
         loadingOverlay.cancel(spinHandle);
         console.log('error')
         alertInfo.innerHTML = "404";
-        alertInfo.classList.remove('hide');
+        alertInfo.classList.add('hide');
     });
 }
 
